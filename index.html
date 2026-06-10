@@ -389,12 +389,140 @@
         .table-arrow.is-double path{ stroke:#16a34a; }
         .table-arrow.is-double polygon{ fill:#16a34a; }
 
+        .nine-system-stage{
+            display:grid;
+            width:100%;
+            height:100%;
+            min-height:28.5rem;
+            place-items:center;
+        }
+        .nine-system-visual{
+            --dot:clamp(1.5rem,3.25vw,2.28rem);
+            --gap:clamp(.3rem,.66vw,.49rem);
+            display:grid;
+            width:min(100%,49rem);
+            grid-template-columns:auto auto auto auto auto;
+            grid-template-rows:auto auto;
+            align-items:center;
+            justify-content:center;
+            justify-items:center;
+            column-gap:var(--system-column-gap,clamp(.18rem,.55vw,.42rem));
+            row-gap:clamp(1.25rem,2.8vw,1.85rem);
+        }
+        .nine-system-matrix{
+            grid-column:3;
+            grid-row:1;
+            position:relative;
+            display:grid;
+            grid-template-columns:repeat(var(--columns),var(--dot));
+            gap:var(--gap);
+            padding:.2rem;
+        }
+        .nine-system-matrix .dot{
+            width:var(--dot);
+        }
+        .nine-system-matrix.is-eight{
+            padding-right:clamp(2rem,3vw,2.65rem);
+        }
+        .nine-system-divider{
+            grid-column:1 / -1;
+            height:2px;
+            margin:calc(var(--gap) * -.18) 0;
+            border-radius:999px;
+            background:rgba(148,163,184,.34);
+        }
+        .nine-system-divider.is-dashed{
+            height:3px;
+            background:repeating-linear-gradient(90deg,rgba(22,101,52,.82) 0 .42rem,transparent .42rem .72rem);
+        }
+        .nine-system-divider.is-strong{
+            background:rgba(14,116,144,.62);
+        }
+        .eight-known-note{
+            position:absolute;
+            top:calc(var(--dot) + (var(--gap) * .55));
+            left:100%;
+            color:rgba(2,6,23,.78);
+            font-size:clamp(.85rem,1.65vw,1.25rem);
+            font-weight:520;
+            line-height:1;
+            letter-spacing:-.04em;
+            pointer-events:none;
+        }
+        .nine-brace{
+            width:clamp(1.18rem,2.1vw,1.72rem);
+            height:100%;
+            color:#0e7490;
+            overflow:visible;
+        }
+        .nine-brace path{
+            fill:none;
+            stroke:currentColor;
+            stroke-width:2.4;
+            stroke-linecap:round;
+            stroke-linejoin:round;
+            vector-effect:non-scaling-stroke;
+        }
+        .nine-brace.is-left{
+            grid-column:2;
+            align-self:stretch;
+            margin-right:var(--brace-nudge,0);
+        }
+        .nine-brace.is-right{
+            grid-column:4;
+            align-self:stretch;
+            margin-left:var(--brace-nudge,0);
+            transform:scaleX(-1);
+        }
+        .nine-brace.is-nine{
+            grid-row:1;
+            align-self:start;
+        }
+        .nine-brace.is-ten{
+            grid-row:1;
+            align-self:start;
+        }
+        .nine-system-label{
+            color:#020617;
+            font-size:clamp(1.9rem,3.4vw,2.95rem);
+            font-weight:430;
+            line-height:1;
+            letter-spacing:-.055em;
+            white-space:nowrap;
+        }
+        .nine-system-label.is-left{
+            grid-column:1;
+            grid-row:1;
+            align-self:start;
+            display:grid;
+            margin-right:var(--label-nudge,0);
+            place-items:center;
+        }
+        .nine-system-label.is-right{
+            grid-column:5;
+            grid-row:1;
+            align-self:start;
+            display:grid;
+            margin-left:var(--label-nudge,0);
+            place-items:center;
+        }
+        .nine-system-equation{
+            grid-column:1 / -1;
+            grid-row:2;
+            color:#020617;
+            font-size:clamp(3.7rem,7vw,5.8rem);
+            font-weight:430;
+            line-height:1;
+            letter-spacing:-.055em;
+            white-space:nowrap;
+        }
+
         .start-screen{
             display:grid;
             width:100%;
-            max-width:44rem;
+            max-width:62rem;
             justify-items:center;
-            gap:1.35rem;
+            gap:1.15rem;
             text-align:center;
         }
         .start-screen h2{
@@ -408,12 +536,48 @@
         .technique-grid{
             display:grid;
             width:min(100%,34rem);
-            grid-template-columns:repeat(3,minmax(0,1fr));
-            gap:.75rem;
+            gap:1rem;
             padding:1rem;
             border-radius:1.5rem;
             background:rgba(255,255,255,.7);
             box-shadow:0 18px 50px -42px rgba(15,23,42,.62), inset 0 0 0 1px rgba(255,255,255,.8);
+        }
+        .technique-grid.is-start{
+            width:min(100%,58rem);
+            grid-template-columns:repeat(3,minmax(0,1fr));
+            align-items:stretch;
+        }
+        .technique-group{
+            display:grid;
+            gap:.62rem;
+            border:1px solid rgba(14,116,144,.18);
+            border-radius:1.05rem;
+            background:linear-gradient(145deg,rgba(255,255,255,.76),rgba(248,252,253,.58));
+            padding:.72rem;
+            box-shadow:0 14px 34px -30px rgba(14,116,144,.42), inset 0 1px 0 rgba(255,255,255,.92);
+        }
+        .technique-grid.is-start .technique-group{
+            align-content:start;
+        }
+        .technique-group + .technique-group{
+            margin-top:.18rem;
+        }
+        .technique-grid.is-start .technique-group + .technique-group{
+            margin-top:0;
+        }
+        .technique-group-title{
+            margin:0;
+            color:#64748b;
+            font-size:.66rem;
+            font-weight:760;
+            letter-spacing:.14em;
+            text-transform:uppercase;
+            text-align:left;
+        }
+        .technique-group-buttons{
+            display:grid;
+            grid-template-columns:repeat(2,minmax(0,1fr));
+            gap:.55rem;
         }
         .family-button.is-active{
             background:linear-gradient(135deg,#0891b2,#14b8a6);
@@ -423,6 +587,9 @@
         }
 
         @media (max-width:1080px){
+            .technique-grid.is-start{
+                grid-template-columns:repeat(2,minmax(0,1fr));
+            }
             .phase-stage.is-final{
                 grid-template-columns:1fr;
                 max-width:44rem;
@@ -449,6 +616,9 @@
             }
         }
         @media (max-width:900px){
+            .technique-grid.is-start{
+                grid-template-columns:1fr;
+            }
             .phase-stage.is-two{
                 grid-template-columns:1fr;
                 max-width:42rem;
@@ -461,8 +631,22 @@
                 --dot:min(7vw,1.9rem);
                 --gap:.2rem;
             }
-            .technique-grid{
-                grid-template-columns:repeat(2,minmax(0,1fr));
+            .nine-system-stage{
+                min-height:27rem;
+            }
+            .nine-system-visual{
+                --dot:min(6.3vw,1.75rem);
+                --gap:.21rem;
+                width:min(100%,35rem);
+                grid-template-columns:auto auto auto auto auto;
+                column-gap:var(--system-column-gap,.18rem);
+                row-gap:1.35rem;
+            }
+            .nine-system-label{
+                font-size:clamp(1.22rem,5vw,2rem);
+            }
+            .nine-system-equation{
+                font-size:clamp(3rem,12vw,4.7rem);
             }
         }
     </style>
@@ -504,7 +688,7 @@
                     <div class="grid gap-3 xl:sticky xl:top-4">
                         <div class="rounded-[1.5rem] bg-white/76 p-3 ring-1 ring-white/80">
                             <p class="mb-2 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-slate-500">Elegir técnica</p>
-                            <div id="side-family-buttons" class="grid grid-cols-2 gap-2"></div>
+                            <div id="side-family-buttons" class="technique-grid !w-full !bg-transparent !p-0 !shadow-none"></div>
                         </div>
                         <button id="next-btn" class="rounded-2xl bg-gradient-to-br from-cyan-600 to-teal-500 px-5 py-3 text-sm font-semibold text-white shadow-[0_16px_30px_-20px_rgba(8,145,178,0.9)] transition hover:-translate-y-0.5" type="button">Siguiente fase</button>
                         <button id="reset-btn" class="rounded-2xl bg-white px-5 py-3 text-sm font-semibold text-emerald-700 ring-1 ring-emerald-100 transition hover:bg-emerald-50" type="button">Volver al inicio</button>
@@ -525,7 +709,27 @@
             const nextBtn = document.getElementById('next-btn');
             const resetBtn = document.getElementById('reset-btn');
             const phases = ['known', 'knownVerified', 'target', 'system'];
+            function easyTechnique(family, label, knownMessage) {
+                return {
+                    family,
+                    knownFamily: family,
+                    factors: [2,3,4,5,6,7,8,9],
+                    label,
+                    knownMessage,
+                    operation: 'easy',
+                    phases: ['known', 'system'],
+                    phaseButtons: ['Verificar', 'Siguiente ejercicio'],
+                    rows: { known: family, target: family, added: [] },
+                    strategy(exercise) {
+                        return {
+                            known: exercise.targetResult,
+                            target: exercise.targetResult,
+                        };
+                    },
+                };
+            }
             const techniques = {
+                2: easyTechnique(2, '2 veces', 'Doblar es una multiplicación fácil.'),
                 3: {
                     family: 3,
                     knownFamily: 2,
@@ -564,6 +768,7 @@
                         };
                     },
                 },
+                5: easyTechnique(5, '5 veces', 'Multiplicar por 5 es una multiplicación fácil.'),
                 6: {
                     family: 6,
                     knownFamily: 5,
@@ -645,6 +850,7 @@
                         };
                     },
                 },
+                10: easyTechnique(10, '10 veces', 'Multiplicar por 10 es una multiplicación fácil.'),
             };
             let selectedTechniqueKey = 9;
             let technique = techniques[selectedTechniqueKey];
@@ -681,6 +887,10 @@
                 if (!exerciseDeck.length) resetExerciseDeck();
                 currentExercise = exerciseDeck.shift();
                 phaseIndex = 0;
+            }
+
+            function activePhases() {
+                return technique.phases || phases;
             }
 
             function matrixHtml(filledRows, fadeEmpty = false, addedRows = []) {
@@ -734,6 +944,233 @@
                 }
 
                 return matrixHtml(technique.rows.target, true, technique.rows.added);
+            }
+
+            function usedRowsHeightStyle(rows) {
+                const dotTerms = Array.from({ length: rows }, () => 'var(--dot)');
+                const gapTerms = Array.from({ length: Math.max(rows - 1, 0) }, () => 'var(--gap)');
+                return `height:calc(${[...dotTerms, ...gapTerms, '.4rem'].join(' + ')});`;
+            }
+
+            function usedRowsData(rows) {
+                return `data-used-rows="${rows}"`;
+            }
+
+            function compactBraceStyle(columns) {
+                if (columns <= 3) {
+                    return '--system-column-gap:.32rem;--brace-nudge:-1rem;--label-nudge:0rem;';
+                }
+
+                if (columns <= 4) {
+                    return '--system-column-gap:.36rem;--brace-nudge:-.68rem;--label-nudge:0rem;';
+                }
+
+                if (columns <= 5) {
+                    return '--system-column-gap:.4rem;--brace-nudge:-.38rem;--label-nudge:0rem;';
+                }
+
+                return '';
+            }
+
+            function finalSystemConfig(ex) {
+                if (selectedTechniqueKey === 3) {
+                    const known = 2 * ex.factor;
+                    const added = ex.factor;
+                    return {
+                        redRows: 2,
+                        greenRows: 1,
+                        leftRows: 3,
+                        rightRows: 2,
+                        leftLabel: `${known} + ${added}`,
+                        rightLabel: known,
+                        equation: `3 · ${ex.factor} = ${ex.targetResult}`,
+                        aria: `Dos veces ${ex.factor} es ${known}; al agregar ${added} queda tres veces ${ex.factor} igual a ${ex.targetResult}`,
+                    };
+                }
+
+                if (selectedTechniqueKey === 4) {
+                    const known = 2 * ex.factor;
+                    return {
+                        redRows: 2,
+                        greenRows: 2,
+                        leftRows: 4,
+                        rightRows: 2,
+                        leftLabel: `2 · ${known}`,
+                        rightLabel: known,
+                        equation: `4 · ${ex.factor} = ${ex.targetResult}`,
+                        aria: `Dos veces ${ex.factor} es ${known}; el doble de ${known} es cuatro veces ${ex.factor}, igual a ${ex.targetResult}`,
+                    };
+                }
+
+                if (selectedTechniqueKey === 6) {
+                    const known = 5 * ex.factor;
+                    const added = ex.factor;
+                    return {
+                        redRows: 5,
+                        greenRows: 1,
+                        leftRows: 6,
+                        rightRows: 5,
+                        leftLabel: `${known} + ${added}`,
+                        rightLabel: known,
+                        equation: `6 · ${ex.factor} = ${ex.targetResult}`,
+                        aria: `Cinco veces ${ex.factor} es ${known}; al agregar ${added} queda seis veces ${ex.factor} igual a ${ex.targetResult}`,
+                    };
+                }
+
+                if (selectedTechniqueKey === 7) {
+                    const known = 5 * ex.factor;
+                    const added = 2 * ex.factor;
+                    return {
+                        redRows: 5,
+                        greenRows: 2,
+                        leftRows: 7,
+                        rightRows: 5,
+                        leftLabel: `${known} + ${added}`,
+                        rightLabel: known,
+                        equation: `7 · ${ex.factor} = ${ex.targetResult}`,
+                        aria: `Cinco veces ${ex.factor} es ${known}; al agregar ${added} queda siete veces ${ex.factor} igual a ${ex.targetResult}`,
+                    };
+                }
+
+            if (selectedTechniqueKey === 8) {
+                    const firstDouble = 2 * ex.factor;
+                    const secondDouble = 4 * ex.factor;
+                    return {
+                        matrixClass: 'is-eight',
+                        rowClasses: [
+                            'is-filled','is-filled',
+                            'is-added','is-added',
+                            'is-filled','is-filled',
+                            'is-added','is-added',
+                            'is-empty','is-empty',
+                        ],
+                        dividers: [
+                            { after: 2, cls: 'is-dashed' },
+                            { after: 4, cls: 'is-strong' },
+                        ],
+                        innerLabel: firstDouble,
+                        leftRows: 8,
+                        rightRows: 4,
+                        leftLabel: `2 · ${secondDouble}`,
+                        rightLabel: secondDouble,
+                        equation: `8 · ${ex.factor} = ${ex.targetResult}`,
+                        aria: `Dos veces ${ex.factor} es ${firstDouble}; el doble de ${firstDouble} es ${secondDouble}; el doble de ${secondDouble} es ocho veces ${ex.factor}, igual a ${ex.targetResult}`,
+                    };
+                }
+
+                return {
+                    redRows: 9,
+                    greenRows: 0,
+                    leftRows: 9,
+                    rightRows: 10,
+                    leftLabel: `${ex.knownResult} − ${ex.factor}`,
+                    rightLabel: ex.knownResult,
+                    equation: `9 · ${ex.factor} = ${ex.targetResult}`,
+                    aria: `Diez veces ${ex.factor} es ${ex.knownResult}; al quitar un grupo de ${ex.factor} queda nueve veces ${ex.factor} igual a ${ex.targetResult}`,
+                };
+            }
+
+            function nineBraceHtml(extraClass, rows) {
+                return `
+                    <svg class="nine-brace ${extraClass}" ${usedRowsData(rows)} style="${usedRowsHeightStyle(rows)}" viewBox="0 0 34 240" preserveAspectRatio="none" aria-hidden="true">
+                        <path d="M28 3 C9 3 9 16 9 30 L9 92 C9 112 3 116 3 120 C3 124 9 128 9 148 L9 210 C9 224 9 237 28 237"></path>
+                    </svg>
+                `;
+            }
+
+            function nineSystemMatrixHtml(config) {
+                const columns = currentExercise?.columns || 9;
+                const dividers = config.dividers || (config.greenRows > 0 ? [{ after: config.redRows, cls: '' }] : []);
+                let html = `<div class="nine-system-matrix ${config.matrixClass || ''}" style="--columns:${columns}" aria-hidden="true">`;
+                for (let row = 1; row <= 10; row++) {
+                    for (let col = 1; col <= columns; col++) {
+                        const cls = config.rowClasses
+                            ? config.rowClasses[row - 1]
+                            : row <= config.redRows
+                                ? 'is-filled'
+                                : row <= config.redRows + config.greenRows
+                                    ? 'is-added'
+                                    : 'is-empty';
+                        html += `<span class="dot ${cls}"></span>`;
+                    }
+                    const divider = dividers.find(item => item.after === row);
+                    if (divider) {
+                        html += `<span class="nine-system-divider ${divider.cls}"></span>`;
+                    }
+                }
+                if (config.innerLabel) {
+                    html += `<span class="eight-known-note">${config.innerLabel}</span>`;
+                }
+                html += '</div>';
+                return html;
+            }
+
+            function renderNineSystem() {
+                const ex = currentExercise;
+                const config = finalSystemConfig(ex);
+                return `
+                    <div class="nine-system-stage" aria-label="${config.aria}">
+                        <div class="nine-system-visual" style="${compactBraceStyle(ex.factor)}">
+                            <span class="nine-system-label is-left" ${usedRowsData(config.leftRows)} style="${usedRowsHeightStyle(config.leftRows)}">${config.leftLabel}</span>
+                            ${nineBraceHtml('is-left is-nine', config.leftRows)}
+                            ${nineSystemMatrixHtml(config)}
+                            ${nineBraceHtml('is-right is-ten', config.rightRows)}
+                            <span class="nine-system-label is-right" ${usedRowsData(config.rightRows)} style="${usedRowsHeightStyle(config.rightRows)}">${config.rightLabel}</span>
+                            <div class="nine-system-equation">${config.equation}</div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function syncFinalSystemBraceHeights() {
+                const matrix = workspace.querySelector('.nine-system-matrix');
+                if (!matrix) return;
+
+                const dot = matrix.querySelector('.dot');
+                if (!dot) return;
+
+                const dots = [...matrix.querySelectorAll('.dot')];
+                const columns = Math.max(dots.length / 10, 1);
+                const matrixRect = matrix.getBoundingClientRect();
+                const matrixStyle = window.getComputedStyle(matrix);
+                const paddingBottom = parseFloat(matrixStyle.paddingBottom) || 0;
+
+                workspace.querySelectorAll('[data-used-rows]').forEach(element => {
+                    const rows = Number(element.dataset.usedRows);
+                    if (!rows) return;
+
+                    const lastDot = dots[(rows * columns) - 1];
+                    if (!lastDot) return;
+
+                    const height = lastDot.getBoundingClientRect().bottom
+                        - matrixRect.top
+                        + paddingBottom;
+                    element.style.height = `${height}px`;
+                });
+
+                const innerNote = matrix.querySelector('.eight-known-note');
+                if (!innerNote) return;
+
+                const firstRowLastDot = dots[columns - 1];
+                const secondRowFirstDot = dots[columns];
+                if (!firstRowLastDot || !secondRowFirstDot) return;
+
+                innerNote.style.left = '0px';
+                innerNote.style.top = '0px';
+
+                const noteRect = innerNote.getBoundingClientRect();
+                const dotRect = firstRowLastDot.getBoundingClientRect();
+                const secondRowRect = secondRowFirstDot.getBoundingClientRect();
+                const minLeft = dotRect.right - matrixRect.left + 4;
+                const maxLeft = matrixRect.width - noteRect.width - 4;
+                const centeredLeft = ((dotRect.right + matrixRect.right) / 2) - matrixRect.left - (noteRect.width / 2);
+                const left = maxLeft >= minLeft
+                    ? Math.max(minLeft, Math.min(centeredLeft, maxLeft))
+                    : maxLeft;
+                const top = ((dotRect.bottom + secondRowRect.top) / 2) - matrixRect.top - (noteRect.height / 2);
+
+                innerNote.style.left = `${left}px`;
+                innerNote.style.top = `${top}px`;
             }
 
             function tableHtml() {
@@ -807,22 +1244,37 @@
             }
 
             function renderFamilyButtons() {
-                return [3,4,6,7,8,9].map(family => `
+                const buttonHtml = family => `
                     <button type="button" data-technique="${family}" class="family-button rounded-2xl border border-slate-100 bg-white px-3 py-2 text-sm font-semibold text-slate-600 transition ${family === selectedTechniqueKey ? 'is-active' : ''} ${techniques[family] ? '' : 'opacity-60'}" ${techniques[family] ? '' : 'disabled'}>
                         ${family} veces
                     </button>
+                `;
+                const groups = [
+                    { title: 'Multiplicaciones fáciles', families: [2,5,10] },
+                    { title: 'Agregar o quitar grupos', families: [3,6,7,9] },
+                    { title: 'Aplicar dobles', families: [4,8] },
+                ];
+
+                return groups.map(group => `
+                    <div class="technique-group">
+                        <p class="technique-group-title">${group.title}</p>
+                        <div class="technique-group-buttons">
+                            ${group.families.map(buttonHtml).join('')}
+                        </div>
+                    </div>
                 `).join('');
             }
 
-            function bindTechniqueButtons(scope) {
+            function bindTechniqueButtons(scope, options = {}) {
                 scope.querySelectorAll('[data-technique]').forEach(button => {
                     button.addEventListener('click', () => {
                         selectedTechniqueKey = Number(button.dataset.technique);
                         technique = techniques[selectedTechniqueKey];
-                        started = false;
+                        started = Boolean(options.startOnSelect);
                         phaseIndex = 0;
                         currentExercise = null;
                         resetExerciseDeck();
+                        if (started) drawExercise();
                         render();
                     });
                 });
@@ -833,7 +1285,7 @@
                     <div class="start-screen">
                         <img src="assets/calcumat-hands-bg.png" alt="Calcumat" class="h-20 w-32 object-contain drop-shadow-[0_14px_20px_rgba(15,23,42,.10)]">
                         <h2>Técnicas para multiplicar</h2>
-                        <div class="technique-grid" aria-label="Selección de técnica">
+                        <div class="technique-grid is-start" aria-label="Selección de técnica">
                             ${renderFamilyButtons()}
                         </div>
                         <button id="start-btn" class="rounded-2xl bg-gradient-to-br from-cyan-600 to-teal-500 px-7 py-3 text-base font-semibold text-white shadow-[0_16px_30px_-20px_rgba(8,145,178,0.9)] transition hover:-translate-y-0.5" type="button">
@@ -894,6 +1346,27 @@
             }
 
             function renderSystem() {
+                if (technique.operation === 'easy') {
+                    const ex = currentExercise;
+                    return `
+                        <div class="phase-stage is-two">
+                            <div class="phase-copy">
+                                <div class="calc-expression is-known-result" aria-label="${ex.targetFamily} veces ${ex.factor} igual a ${ex.targetResult}">
+                                    <span>${ex.targetFamily}</span><span>·</span><span>${ex.factor}</span><span>=</span><strong>${ex.targetResult}</strong>
+                                </div>
+                                <p class="phase-intro text-emerald-700">${technique.knownMessage}</p>
+                            </div>
+                            <div class="grid place-items-center">
+                                ${matrixHtml(technique.rows.target)}
+                            </div>
+                        </div>
+                    `;
+                }
+
+                if ([3, 4, 6, 7, 8, 9].includes(selectedTechniqueKey)) {
+                    return renderNineSystem();
+                }
+
                 const ex = currentExercise;
                 const strategy = technique.strategy(ex);
                 return `
@@ -930,7 +1403,7 @@
                 contentSection.style.gridTemplateColumns = started ? '' : '1fr';
                 familyTitle.textContent = `Familia ${technique.label}`;
                 sideFamilyButtons.innerHTML = renderFamilyButtons();
-                bindTechniqueButtons(sideFamilyButtons);
+                bindTechniqueButtons(sideFamilyButtons, { startOnSelect: true });
 
                 if (!started) {
                     progressPill.textContent = 'Inicio';
@@ -945,8 +1418,9 @@
                     return;
                 }
 
-                const phase = phases[phaseIndex];
-                progressPill.textContent = `Fase ${phaseIndex + 1} de ${phases.length}`;
+                const phaseList = activePhases();
+                const phase = phaseList[phaseIndex];
+                progressPill.textContent = `Fase ${phaseIndex + 1} de ${phaseList.length}`;
                 nextBtn.textContent = technique.phaseButtons[phaseIndex];
                 workspace.innerHTML = phase === 'known'
                     ? renderKnown()
@@ -955,10 +1429,11 @@
                         : phase === 'target'
                             ? renderTarget()
                             : renderSystem();
+                syncFinalSystemBraceHeights();
             }
 
             nextBtn.addEventListener('click', () => {
-                if (phaseIndex === phases.length - 1) {
+                if (phaseIndex === activePhases().length - 1) {
                     drawExercise();
                 } else {
                     phaseIndex++;
@@ -973,6 +1448,8 @@
                 resetExerciseDeck();
                 render();
             });
+
+            window.addEventListener('resize', syncFinalSystemBraceHeights);
 
             render();
         })();
